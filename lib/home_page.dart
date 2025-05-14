@@ -86,11 +86,26 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   'Gambar disimpan di: ${_imageFile?.path ?? 'Tidak ada'}',
                   style: const TextStyle(fontSize: 12),
-                )
+                ),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.delete),
+                  label: const Text('Hapus Gambar'),
+                  onPressed: () async {
+                    await _imageFile?.delete();
+                    setState(() => _imageFile == null);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Gambar dihapus'))
+                    );
+                  }
+                ),
               ],
             )
+            else
+              const Text('Belum ada gambar yang diambil/dipilih.'),
+            const SizedBox(height: 20)
           ],
-        )),
+        ),
+      ),
     );
   }
 }
