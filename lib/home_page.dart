@@ -64,7 +64,29 @@ class _HomePageState extends State<HomePage> {
                     label: const Text('Ambil Foto'),
                     onPressed: _takePicture
                   ),
+                ),
+                ElevatedButton.icon(
+                  icon: const Icon(Icons.folder),
+                  label: const Text('Pilih dari Galeri'),
+                  onPressed: _pickFromGallery, 
                 ), 
+              ],
+            ),
+            const SizedBox(height: 20),
+            if (_imageFile != null)
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.file(
+                    _imageFile!,
+                    width: double.infinity,
+                  ),
+                ),
+                Text(
+                  'Gambar disimpan di: ${_imageFile?.path ?? 'Tidak ada'}',
+                  style: const TextStyle(fontSize: 12),
+                )
               ],
             )
           ],
